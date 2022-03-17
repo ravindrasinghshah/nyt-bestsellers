@@ -1,0 +1,29 @@
+
+@apiBaseURL = https://api.nytimes.com/svc/books/v3/lists
+@apiKey = lwZEVfolIZS1lGUG4Zi8TIbXi0FJpmom
+
+### Get Best Sellers list names.
+GET {{apiBaseURL}}/names.json?api-key={{apiKey}}
+Accept: application/json
+
+### Get Best Sellers list history.
+GET {{apiBaseURL}}/best-sellers/history.json?api-key={{apiKey}}
+Accept: application/json
+
+### Get top 5 books for all the Best Sellers lists for specified date.
+GET {{apiBaseURL}}/overview.json?published_date=2022-02-13&api-key={{apiKey}}
+Accept: application/json
+
+
+### Get Best Sellers list by name.
+GET {{apiBaseURL}}/current/hardcover-fiction.json?api-key={{apiKey}}
+Accept: application/json
+
+### Get Best Sellers list by name 2.
+GET {{apiBaseURL}}/?list=hardcover-fiction&api-key={{apiKey}}
+Accept: application/json
+
+### Get all books for all the Best Sellers lists for specified date.
+GET {{apiBaseURL}}/full-overview.json?api-key={{apiKey}}
+Accept: application/json
+
