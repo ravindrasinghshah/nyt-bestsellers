@@ -21,6 +21,12 @@ export default function Book() {
                     <div className={style.title}>{book.title}</div>
                     <div className="flex flex-row">
                         <div className={style.subtitle}>
+                             <div>
+                                <span className="font-thin">Category</span> <span>TBD</span>
+                            </div>
+                            <div className="mx-2 leading-3">
+                                <span>.</span>
+                            </div>
                             <div>
                                 <span className="font-thin">Author</span> <span>{book.author}</span>
                             </div>
