@@ -22,7 +22,7 @@ export default function Book() {
                     <div className="flex flex-row">
                         <div className={style.subtitle}>
                              <div>
-                                <span className="font-thin">Category</span> <span>TBD.</span>
+                                <span className="font-thin">Category</span> <span>TBD..</span>
                             </div>
                             <div className="mx-2 leading-3">
                                 <span>.</span>
