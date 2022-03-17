@@ -1,0 +1,55 @@
+
+import { service } from '../http/service';
+import { useEffect, useState } from 'react';
+import Card from './Card';
+import Loading from './Loading';
+
+export default function Top5BestSelling() {
+    const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        async function fetchNames() {
+            await service.getTop5BestSellingByDate().then(function (response) {
+                setData({ data: response });
+                setIsLoading(false);
+            });
+        }
+        fetchNames();
+
+    }, []);
+    return (
+        <div className={style.wrapper}>
+            <h1 className={style.title}>
+                The New York Times Best Sellers Top 5 books By Category
+            </h1>
+            {isLoading ? <Loading /> :
+                (<div className='h-full overflow-y-auto'>
+                    {!isLoading && data && (
+                        <>
+                            {data.data.results.lists.map((item, index) => {
+                                return (
+                                    <div className='reveal' key={index} id={"item_" + item.list_id} >
+                                        <h1 className='font-semibold'>
+                                            Category: {item.display_name}
+                                        </h1>
+                                        <div className='cards-row'>
+                                            {
+                                                item.books.map((book, index) => {
+                                                    return (<Card key={index} book={book} />)
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </>
+                    )}
+                </div>)}
+        </div>
+    )
+}
+
+const style = {
+    wrapper: `p-5 m-5 mt-16 border-t`,
+    title: `text-3xl pt-5 pb-10 text-center`
+};

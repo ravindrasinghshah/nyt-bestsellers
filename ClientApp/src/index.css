@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .cards-row {
+        display       : flex;
+        flex-direction: row;
+        flex-wrap     : wrap;
+    }
+
+    .card {
+        max-width    : 18%;
+        margin-right : 20px;
+        border-radius: theme('borderRadius.lg');
+        box-shadow   : none;
+        margin-bottom: 25px;
+    }
+
+}
+
+body {
+    color: #222222;
+}
+
+.reveal {
+    position  : relative;
+    transform : translateY(0px);
+    opacity   : 0;
+    transition: 1s all ease;
+}
+
+.reveal.active {
+    transform: translateY(0);
+    opacity  : 1;
+}
+
+.modal {
+    position  : fixed;
+    top       : 0;
+    left      : 0;
+    width     : 100%;
+    height    : 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-main {
+    position  : fixed;
+    background: white;
+    width     : 80%;
+    height    : auto;
+    top       : 50%;
+    left      : 50%;
+    transform : translate(-50%, -50%);
+}
+
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}
