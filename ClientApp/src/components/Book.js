@@ -6,7 +6,7 @@ import Share from "./Share";
 
 export default function Book() {
     const location = useLocation();
-    const book = location.state.book;
+    const book = location.state?.book;
     console.log(book)
     return (
         <div className={style.wrapper}>
