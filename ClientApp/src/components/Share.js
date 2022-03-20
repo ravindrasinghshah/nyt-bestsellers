@@ -13,6 +13,8 @@ import {
     WhatsappShareButton, WhatsappIcon,
     TwitterShareButton, TwitterIcon
 } from "react-share";
+import { ToastContainer, toast, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Share() {
     const [show, setShow] = useState(false);
@@ -20,6 +22,18 @@ export default function Share() {
     const hideModal = () => { setShow(false); }
     const showHideClassName = show ? style.show : style.hide;
     const bookRoute = window.location.href;
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText(bookRoute)
+        toast.success('Link Copied', {
+            position: "bottom-center",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined
+        });
+    }
 
     return (
         <>
@@ -32,7 +46,7 @@ export default function Share() {
                         <h1 className='font-semibold text-2xl pb-6'>Share this book</h1>
                         <div className={style.shareButtonWrapper}>
                             <button className={style.shareButton}
-                                onClick={navigator.clipboard.writeText(bookRoute)}>
+                                onClick={handleCopyLink}>
                                 <div className={style.shareButtonContent}>
                                     <IoCopyOutline className="mr-3 rounded-md" />
                                     <span>Copy Link</span>
@@ -60,7 +74,7 @@ export default function Share() {
                                     quote={AppShareTitle}>
                                     <div className={style.shareButtonContent}>
                                         <FacebookIcon size={32} className="mr-3 rounded-md" />
-                                        <span> Facebook</span>
+                                        <span>Facebook</span>
                                     </div>
                                 </FacebookShareButton>
                             </button>
@@ -126,12 +140,12 @@ export default function Share() {
                             </button>
                         </div>
                     </div>
+                    <ToastContainer transition={Zoom} />
                     <div className={style.action}>
                         <button type="button" onClick={hideModal}>
                             Close
                         </button>
                     </div>
-
                 </div>
             </div>
         </>
