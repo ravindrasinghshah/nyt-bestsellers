@@ -146,7 +146,7 @@ const style = {
     content: `bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4`,
     action: `bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse hover:underline`,
     share: `flex flex-row items-center hover:underline font-semibold`,
-    shareButtonWrapper: `flex flex-row justify-start items-center space-x-5`,
-    shareButton: `border w-1/2 rounded text-base font-normal h-16 mb-5 hover:bg-gray-100`,
+    shareButtonWrapper: `flex flex-col md:flex-row justify-start items-center space-x-0 md:space-x-5`,
+    shareButton: `border w-full md:w-1/2 rounded text-base font-normal h-12 md:h-16 mb-3 md:mb-5 hover:bg-gray-100`,
     shareButtonContent: `flex flex-row items-center justify-start ml-5`
 }
