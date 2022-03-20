@@ -1,13 +1,17 @@
 import { useLocation, Link } from "react-router-dom";
 import moment from 'moment';
 import { FiExternalLink } from 'react-icons/fi';
+import { BsFillTrophyFill } from 'react-icons/bs';
 import Error from "./Error";
 import Share from "./Share";
 
 export default function Book() {
     const location = useLocation();
     const book = location.state?.book;
-    console.log(book)
+    const name = location.state?.name;
+    console.log(location);
+
+    // publish date, category and title
     return (
         <div className={style.wrapper}>
             {book ? (<>
@@ -21,12 +25,6 @@ export default function Book() {
                     <div className={style.title}>{book.title}</div>
                     <div className="flex flex-row">
                         <div className={style.subtitle}>
-                             <div>
-                                <span className="font-thin">Category</span> <span>TBD.</span>
-                            </div>
-                            <div className="mx-2 leading-3">
-                                <span>.</span>
-                            </div>
                             <div>
                                 <span className="font-thin">Author</span> <span>{book.author}</span>
                             </div>
@@ -42,22 +40,28 @@ export default function Book() {
                             <div>
                                 <span className="font-thin">Published by</span> <span>{book.publisher}</span>
                             </div>
+                            <div className="mx-2 leading-3">
+                                <span>.</span>
+                            </div>
+                            <div>
+                                <span className="font-thin">Category</span> <span>{name}</span>
+                            </div>
                         </div>
                         <div className={style.subtitle + " " + style.share}>
                             <Share />
                         </div>
                     </div>
-                    <div className="flex flex-row pt-10">
+                    <div className={style.detailsWrapper}>
                         <div className="rounded">
-                            <img src={book.book_image} className="rounded" alt="book_cover" />
+                            <img src={book.book_image} className="rounded w-full" alt="book_cover" />
                         </div>
-                        <div className="ml-10 pl-10 border-l">
+                        <div className="pt-10 md:pt-0 md:ml-10 md:pl-10 md:border-l">
                             <div>
                                 <p className="font-semibold text-xl pb-2"> About Book </p>
                                 {book.description}
                             </div>
-                            <div>
-                                This book ranked {book.rank} on {moment(book.updated_date.split(' ')[0]).format('LL')}
+                            <div className="flex flex-row items-center pt-5">
+                                <BsFillTrophyFill className="mr-3 text-[#FDCC0D] text-xl"/> <span>Book ranked <strong>{book.rank}</strong> on {moment(book.updated_date.split(' ')[0]).format('LL')}.</span>
                             </div>
                             <div className={style.buyWrapper}>
                                 <p className="pb-2">Buy Book</p>
@@ -88,13 +92,14 @@ export default function Book() {
 }
 
 const style = {
-    wrapper: `w-screen font-light px-20 pt-10 pb-5`,
+    wrapper: `w-screen font-light pt-10 pb-5 px-5 lg:px-20`,
     back: `underline text-sm`,
     nyt: `font-semibold text-sm flex flex-row items-center pt-7`,
     title: `text-3xl font-semibold pt-3 pb-2`,
-    subtitle: `flex text-sm`,
+    subtitle: `flex flex-col md:flex-row text-sm`,
     share: `ml-auto items-center`,
+    detailsWrapper: `flex flex-col md:flex-row pt-10`,
     buyWrapper: `flex flex-col border-t mt-12 pt-8 text-xl font-semibold`,
     buyBox: `flex items-center flex-wrap pt-2`,
-    action: `flex flex-row items-center border p-2 mr-2 rounded bg-white hover:bg-gray-100 font-thin text-sm`
+    action: `flex flex-row items-center border p-2 mr-2 mt-1 rounded bg-white hover:bg-gray-100 font-thin text-sm`
 }

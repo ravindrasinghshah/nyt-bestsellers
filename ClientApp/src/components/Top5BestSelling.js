@@ -11,11 +11,11 @@ export default function Top5BestSelling() {
         async function fetchNames() {
             await service.getTop5BestSellingByDate().then(function (response) {
                 setData({ data: response });
+                console.log(response)
                 setIsLoading(false);
             });
         }
         fetchNames();
-
     }, []);
     return (
         <div className={style.wrapper}>
@@ -35,7 +35,10 @@ export default function Top5BestSelling() {
                                         <div className='cards-row'>
                                             {
                                                 item.books.map((book, index) => {
-                                                    return (<Card key={index} book={book} />)
+                                                    return (<Card key={index} book={book}
+                                                        nameEncoded={item.list_name_encoded}
+                                                        name={item.list_name}
+                                                        publishedDate={data.data.results.published_date} />)
                                                 })
                                             }
                                         </div>

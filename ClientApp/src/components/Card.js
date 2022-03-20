@@ -2,6 +2,8 @@ import { FiExternalLink } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 export default function Card(prop) {
+    // console.log(prop.book)
+    var searchQuery = `?d=${prop.publishedDate}&n=${prop.nameEncoded}&t=${prop.book.title}`
     return (
         <div className={style.wrapper}>
             <div className="relative overflow-hidden">
@@ -14,10 +16,13 @@ export default function Card(prop) {
                 <p className={style.author}>- {prop.book.author}</p>
                 {/* <p className='text-sm font-thin text-gray-800'>{prop.book.description}</p> */}
                 {/* <p>ISBN: {prop.book.primary_isbn10}</p> */}
+                {/* 
+                <p>Create date: {prop.publishedDate}</p>
+                <p>Category: {prop.category}</p> */}
                 <p>
                     <Link
-                        to={"/book"}
-                        state={{ book: prop.book }}>
+                        to={`/book${searchQuery}`}
+                        state={{ book: prop.book, name: prop.name }}>
                         Go to Book
                     </Link>
                 </p>
