@@ -6,6 +6,7 @@ const Footer = () => {
       <div className={style.flex}>
         <div className='text-center flex justify-items-end w-full'>
           <Link className={style.h_underline + " mr-5"} to="/">Home</Link>
+          <Link className={style.h_underline + " mr-5"} to="/about">About Us</Link>
           <Link className={style.h_underline + " mr-5"} to="/terms-of-use" >Terms of Use</Link>
           <a href="https://developer.nytimes.com/apis" target="_blank" className={style.h_underline}>
             <img src='https://developer.nytimes.com/files/poweredby_nytimes_150c.png?v=1583354208341' 

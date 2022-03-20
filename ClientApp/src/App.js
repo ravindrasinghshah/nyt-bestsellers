@@ -5,6 +5,7 @@ import Home from './components/Home';
 import TermsOfUse from './components/TermsOfUse';
 import Book from './components/Book';
 import NotFound from './components/NotFound';
+import AboutUs from './components/AboutUs';
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/book" element={<Book />} />
+
+          <Route exact path="/about" element={<AboutUs />} />
           <Route exact path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
