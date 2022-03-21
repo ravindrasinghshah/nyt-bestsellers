@@ -61,7 +61,7 @@ export default function Book() {
                                 {book.description}
                             </div>
                             <div className="flex flex-row items-center pt-5">
-                                <BsFillTrophyFill className="mr-3 text-[#FDCC0D] text-xl"/> <span>Book ranked <strong>{book.rank}</strong> on {moment(book.updated_date.split(' ')[0]).format('LL')}.</span>
+                                <BsFillTrophyFill className="mr-3 text-[#FDCC0D] text-xl" /> <span>Book ranked <strong>{book.rank}</strong> on {moment(book?.updated_date?.split(' ')[0]).format('LL')}.</span>
                             </div>
                             <div className={style.buyWrapper}>
                                 <p className="pb-2">Buy Book</p>
@@ -84,9 +84,7 @@ export default function Book() {
                         </div>
                     </div>
                 </div>
-
-            </>) : (
-                <div className="h-52"><Error /></div>)}
+            </>) : (<Error />)}
         </div>
     )
 }

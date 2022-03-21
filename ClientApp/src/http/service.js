@@ -13,7 +13,7 @@ const Top5BestSellingByDate = () => {
 
 // Get Best Sellers list by date.
 const BestSellingByName = (name) => {
-    return execute(`?list=${name}&`);
+    return execute(`/current/${name}.json?`);
 };
 
 // Get all books for all the Best Sellers lists for specified date.

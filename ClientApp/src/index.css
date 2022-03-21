@@ -4,14 +4,16 @@
 
 @layer components {
     .cards-row {
-        display       : flex;
-        flex-direction: row;
-        flex-wrap     : wrap;
+        display        : flex;
+        flex-direction : row;
+        flex-wrap      : wrap;
+        justify-content: space-between;
     }
 
     .card {
-        max-width    : 18%;
-        margin-right : 20px;
+        width        : 19%;
+        max-width    : 19%;
+        /* margin-right : 20px; */
         border-radius: theme('borderRadius.lg');
         box-shadow   : none;
         margin-bottom: 25px;

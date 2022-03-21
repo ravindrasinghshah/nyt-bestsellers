@@ -6,6 +6,7 @@ import TermsOfUse from './components/TermsOfUse';
 import Book from './components/Book';
 import NotFound from './components/NotFound';
 import AboutUs from './components/AboutUs';
+import BestSellers from './components/BestSellers';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/book" element={<Book />} />
-
+          <Route exact path="/best-sellers/:category" element={<BestSellers />} />
           <Route exact path="/about" element={<AboutUs />} />
           <Route exact path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="*" element={<NotFound />} />

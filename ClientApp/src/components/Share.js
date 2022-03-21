@@ -153,7 +153,7 @@ export default function Share() {
 }
 
 const style = {
-    wrapper: `flex items-center justify-center min-h-screen text-center sm:p-0`,
+    wrapper: `flex items-center justify-center min-h-screen text-center sm:p-0 z-[1000]`,
     show: `modal display-block`,
     hide: `modal display-none`,
     body: `align-bottom bg-white inline-block overflow-hidden relative rounded-lg shadow-xl sm:align-middle sm:max-w-lg sm:my-8 sm:w-full text-left transform transition-all`,

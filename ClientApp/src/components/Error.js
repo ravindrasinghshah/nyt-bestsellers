@@ -10,5 +10,5 @@ export default function Error() {
 }
 
 const style = {
-    wrapper: `flex flex-row justify-center items-center text-2xl p-10`
+    wrapper: `flex flex-row justify-center items-center text-2xl p-10 h-52`
 }

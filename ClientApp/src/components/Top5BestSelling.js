@@ -3,6 +3,7 @@ import { service } from '../http/service';
 import { useEffect, useState } from 'react';
 import Card from './Card';
 import Loading from './Loading';
+import { Link } from 'react-router-dom';
 
 export default function Top5BestSelling() {
     const [isLoading, setIsLoading] = useState(true);
@@ -29,9 +30,15 @@ export default function Top5BestSelling() {
                             {data.data.results.lists.map((item, index) => {
                                 return (
                                     <div className='reveal' key={index} id={"item_" + item.list_id} >
-                                        <h1 className='font-semibold'>
-                                            Category: {item.display_name}
-                                        </h1>
+                                        <div className='flex flex-row justify-between items-center'>
+                                            <div className={style.categoryTitle}>
+                                                Best sellers of {item.display_name}
+                                            </div>
+                                            <div className='underline'>
+                                                <Link to={`/best-sellers/${item.list_name_encoded}`}
+                                                    target="_blank">Show all</Link>
+                                            </div>
+                                        </div>
                                         <div className='cards-row'>
                                             {
                                                 item.books.map((book, index) => {
@@ -47,12 +54,14 @@ export default function Top5BestSelling() {
                             })}
                         </>
                     )}
-                </div>)}
-        </div>
+                </div>)
+            }
+        </div >
     )
 }
 
 const style = {
     wrapper: `p-5 m-5 mt-16 border-t`,
-    title: `text-3xl pt-5 pb-10 text-center`
+    title: `text-3xl py-10 text-center`,
+    categoryTitle: `font-normal text-2xl pb-2 pt-5`
 };
