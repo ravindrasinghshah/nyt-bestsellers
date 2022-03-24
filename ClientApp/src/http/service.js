@@ -25,12 +25,32 @@ const BestSellingByDate = (date) => {
 const BestSellingHistory = () => {
     return execute(`best-sellers/history.json`);
 };
+// Get books by published date and category
+const BooksByDateAndCategory = (p_date, category) => {
+    return execute(`${p_date}/${category}.json?`);
+}
 
+// Get books by published date and category and title
+const BookByDate_Category_Title = async (p_date, category, title) => {
+    var promise = BooksByDateAndCategory(p_date, category);
+    const response = await promise;
+    if (response && response.results && response.results.books
+        && response.results.books.length > 0) {
+        var book = response.results.books.filter(book_1 => book_1.title == title).map(result => (result));
+
+        if (book.length > 0)
+            return book[0];
+        else
+            return null;
+    }
+    return null;
+}
 
 export const service = {
     getNames: Names,
     getTop5BestSellingByDate: Top5BestSellingByDate,
     getBestSellingByName: BestSellingByName,
     getBestSellingByDate: BestSellingByDate,
-    getBestSellingHistory: BestSellingHistory
+    getBestSellingHistory: BestSellingHistory,
+    getBookByDate_Category_Title: BookByDate_Category_Title
 };

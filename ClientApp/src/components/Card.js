@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 
 export default function Card(prop) {
-    // console.log(prop.book)
     var searchQuery = `?d=${prop.publishedDate}&n=${prop.nameEncoded}&t=${prop.book.title}`
     return (
         <div className={style.wrapper}>
             <Link
                 to={`/book${searchQuery}`}
-                state={{ book: prop.book, name: prop.name }}>
+                state={{ book: prop.book, name: prop.name }}
+                target="_blank">
                 <div className="relative overflow-hidden">
                     <img src={prop.book.book_image} alt="book_image" className={style.image + " object-fill"} />
                 </div>
