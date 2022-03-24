@@ -41,7 +41,7 @@ export default function BestSellers() {
                                     <div className="flex flex-row">
                                         <div className={style.subtitle}>
                                             <div>
-                                                <span className="font-thin">Found</span> <span>{books.num_results}</span>
+                                                <span className="font-thin">Books found</span> <span>{books.num_results}</span>
                                             </div>
                                             <div className="mx-2 leading-3">
                                                 <span>.</span>
@@ -54,8 +54,7 @@ export default function BestSellers() {
                                                 <span>.</span>
                                             </div>
                                             <div>
-                                                <span className="font-thin">Updates </span>
-                                                <span>{books.results.updated}</span>
+                                                <span className="font-thin">Updates</span> <span>{books.results.updated}</span>
                                             </div>
                                         </div>
                                         <div className={style.subtitle + " " + style.share}>

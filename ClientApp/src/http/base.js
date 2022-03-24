@@ -1,5 +1,5 @@
-const url = `https://api.nytimes.com/svc/books/v3/lists/`;
-const apiKey = `lwZEVfolIZS1lGUG4Zi8TIbXi0FJpmom`;
+const url = process.env.REACT_APP_ApiUrl;
+const apiKey = process.env.REACT_APP_ApiKey;
 
 export const execute = async (path) => {
     let apiUrl = url + path + "api-key=" + apiKey;
