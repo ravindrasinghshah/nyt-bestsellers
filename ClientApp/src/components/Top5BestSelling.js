@@ -30,7 +30,7 @@ export default function Top5BestSelling() {
                             {data.data.results.lists.map((item, index) => {
                                 return (
                                     <div className='reveal' key={index} id={"item_" + item.list_id} >
-                                        <div className='flex flex-row justify-between items-center'>
+                                        <div className={style.categoryHeader}>
                                             <div className={style.categoryTitle}>
                                                 Best sellers of {item.display_name}
                                             </div>
@@ -39,7 +39,7 @@ export default function Top5BestSelling() {
                                                     target="_blank">Show all</Link>
                                             </div>
                                         </div>
-                                        <div className='cards-row'>
+                                        <div className={style.cardRow}>
                                             {
                                                 item.books.map((book, index) => {
                                                     return (<Card key={index} book={book}
@@ -63,5 +63,7 @@ export default function Top5BestSelling() {
 const style = {
     wrapper: `p-5 m-5 mt-16 border-t`,
     title: `text-3xl py-10 text-center`,
-    categoryTitle: `font-normal text-2xl pb-2 pt-5`
+    categoryHeader: `flex flex-col md:flex-row justify-between items-center`,
+    categoryTitle: `font-normal text-2xl pb-2 pt-5`,
+    cardRow: `flex flex-col md:flex-row flex-wrap justify-between mt-10 w-full`
 };

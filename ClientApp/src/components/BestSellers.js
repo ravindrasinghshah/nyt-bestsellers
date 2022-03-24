@@ -62,7 +62,7 @@ export default function BestSellers() {
                                             <Share />
                                         </div>
                                     </div>
-                                    <div className={style.detailsWrapper}>
+                                    <div className={style.cardRow}>
                                         {books.results.books.map((book, index) => {
                                             return (
                                                 <Card key={index} book={book}
@@ -88,5 +88,6 @@ const style = {
     nyt: `font-semibold text-3xl flex flex-row items-center pt-7 pb-2`,
     subtitle: `flex flex-col md:flex-row text-sm`,
     share: `ml-auto items-center`,
-    detailsWrapper: `flex flex-col md:flex-row pt-10 flex-wrap justify-between`,
+    detailsWrapper: `flex flex-col md:flex-row pt-10 flex-wrap justify-start`,
+    cardRow: `flex flex-col md:flex-row flex-wrap justify-between mt-10 w-full`
 }
