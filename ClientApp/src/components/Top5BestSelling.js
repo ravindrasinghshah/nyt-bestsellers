@@ -34,7 +34,7 @@ export default function Top5BestSelling() {
                                             <div className={style.categoryTitle}>
                                                 Best sellers of {item.display_name}
                                             </div>
-                                            <div className='underline'>
+                                            <div className='underline text-sm'>
                                                 <Link to={`/best-sellers/${item.list_name_encoded}`}
                                                     target="_blank">Show all</Link>
                                             </div>
@@ -61,7 +61,7 @@ export default function Top5BestSelling() {
 }
 
 const style = {
-    wrapper: `p-5 m-5 mt-16 border-t`,
+    wrapper: `px-5 md:px-10 mt-16 border-t`,
     title: `text-3xl py-10 text-center`,
     categoryHeader: `flex flex-col md:flex-row justify-between items-center`,
     categoryTitle: `font-normal text-2xl pb-2 pt-5`,

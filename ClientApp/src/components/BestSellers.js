@@ -6,7 +6,6 @@ import Loading from './Loading';
 import Error from "./Error";
 import Card from "./Card";
 import Share from "./Share";
-import { IoBookmarksOutline } from "react-icons/io5";
 
 export default function BestSellers() {
     const [isLoading, setIsLoading] = useState(true);
@@ -82,7 +81,7 @@ export default function BestSellers() {
 }
 
 const style = {
-    wrapper: `w-screen font-light pt-10 pb-5 px-5 lg:px-20`,
+    wrapper: `w-screen font-light pt-10 pb-5 px-5 md:px-10`,
     back: `underline text-sm`,
     nyt: `font-semibold text-3xl flex flex-row items-center pt-7 pb-2`,
     subtitle: `flex flex-col md:flex-row text-sm`,
