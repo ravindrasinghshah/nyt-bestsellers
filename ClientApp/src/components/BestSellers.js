@@ -17,12 +17,12 @@ export default function BestSellers() {
         async function fetchNames() {
             await service.getBestSellingByName(category).then(function (response) {
                 setData(response);
-                console.log(response)
+                // console.log(response)
                 setIsLoading(false);
             });
         }
         fetchNames();
-    }, []);
+    }, [category]);
     return (
         <div className={style.wrapper}>
             <Link to="/" className={style.back}>Go back to home</Link>

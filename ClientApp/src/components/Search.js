@@ -4,28 +4,13 @@ import Autocomplete from './Autocomplete';
 
 export default function Search() {
     const [isLoading, setIsLoading] = useState(true);
-    const [names, setNames] = useState([]);
     const [history, setHistory] = useState([]);
     const handleSearchClick = (event) => {
         service.getBestSellingHistory().then(response => {
             console.log('getBestSellingHistory', response);
         });
     };
-    const handleTopBestSellerClick = (e) => {
-        service.getTop5BestSellingByDate().then(response => {
-            console.log(response);
-        });
-    };
-    async function fetchNames() {
-        await service.getNames().then(function (response) {
-            let tempNames = [];
-            response.results.forEach(name => {
-                tempNames.push(name.display_name);
-            });
-            setNames({ names: tempNames });
-            setIsLoading(false);
-        });
-    }
+
     async function fetchHistory() {
         await service.getBestSellingHistory().then(function (response) {
             let history = [];

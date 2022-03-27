@@ -1,6 +1,6 @@
 import { FiExternalLink } from 'react-icons/fi';
 
-export default function BuyBook({book}) {
+export default function BuyBook({ book }) {
     return (
         <div className={style.wrapper}>
             <p className="pb-2">Buy Book</p>
@@ -8,7 +8,8 @@ export default function BuyBook({book}) {
                 {book.buy_links.map((buy, index) => {
                     return (<a href={buy.url} name={buy.name}
                         key={index}
-                        target="_blank"
+                        target={"_blank"}
+                        rel="noreferrer"
                         className={style.action}>
                         <span><FiExternalLink /></span>
                         <span className='ml-2'>{buy.name}</span>

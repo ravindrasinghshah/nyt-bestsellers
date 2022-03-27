@@ -1,5 +1,4 @@
 import banner from '../svg/banner-2.svg';
-import Search from './Search';
 
 export default function Banner() {
   return (

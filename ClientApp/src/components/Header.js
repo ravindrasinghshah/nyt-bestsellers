@@ -1,13 +1,3 @@
-import logo from '../svg/logo.svg';
-
-function OldHeader() {
-  return (
-    <div className={style.wrapper}>
-      <img src={logo} className={style.logo} alt="logo" />  <span>Best Seller Books</span>
-    </div>
-  )
-}
-
 export default function Header() {
   return (
     <div className={style.wrapper}>

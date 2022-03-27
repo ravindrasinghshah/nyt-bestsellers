@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Autocomplete(props) {
     const books = props;
@@ -15,7 +15,7 @@ export default function Autocomplete(props) {
     const onChange = e => {
         const { suggestions } = books;
         const userInput = e.currentTarget.value;
-         console.log(suggestions.history);
+        console.log(suggestions.history);
 
         var filteredMatches = [];
         suggestions.history.forEach(book => {

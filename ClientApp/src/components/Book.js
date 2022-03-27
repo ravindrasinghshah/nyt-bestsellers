@@ -34,7 +34,7 @@ export default function Book() {
         }
         if (isLoading)
             fetchBook();
-    }, []);
+    }, [isLoading]);
     return (
         <div className={style.wrapper}>
             <>
