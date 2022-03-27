@@ -8,6 +8,7 @@ import { service } from '../http/service';
 import Error from "./Error";
 import Share from "./Share";
 import Loading from './Loading';
+import SupportUs from './SupportUs';
 
 export default function Book() {
     const location = useLocation();
@@ -103,9 +104,8 @@ export default function Book() {
                                                     )
                                                 })}
                                             </div>
-
+                                            <SupportUs />
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@ const style = {
     subtitle: `flex flex-col md:flex-row text-sm`,
     share: `ml-auto items-center`,
     detailsWrapper: `flex flex-col md:flex-row pt-10`,
-    detailsSection:`pt-10 md:pt-0 md:ml-10 md:pl-10 md:border-l`,
+    detailsSection: `pt-10 md:pt-0 md:ml-10 md:pl-10 md:border-l`,
     buyWrapper: `flex flex-col border-t mt-12 pt-8 text-xl font-semibold`,
     buyBox: `flex items-center flex-wrap pt-2`,
     action: `flex flex-row items-center border p-2 mr-2 mt-1 rounded bg-white hover:bg-gray-100 font-thin text-sm`
