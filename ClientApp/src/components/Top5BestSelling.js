@@ -12,7 +12,7 @@ export default function Top5BestSelling() {
         async function fetchNames() {
             await service.getTop5BestSellingByDate().then(function (response) {
                 setData({ data: response });
-                console.log(response)
+              //  console.log(response)
                 setIsLoading(false);
             });
         }
@@ -21,7 +21,7 @@ export default function Top5BestSelling() {
     return (
         <div className={style.wrapper}>
             <h1 className={style.title}>
-                The New York Times Best Sellers Top 5 books By Category
+                The New York Times Current Week's Best Sellers Top 5 Books
             </h1>
             {isLoading ? <Loading /> :
                 (<div className='h-full overflow-y-auto'>
