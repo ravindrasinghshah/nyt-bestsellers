@@ -1,7 +1,11 @@
+import { Link } from 'react-router-dom';
+
 export default function Header() {
   return (
     <div className={style.wrapper}>
-      <span>NYT Best Sellers</span>
+      <span>
+        <Link to="/">NYT Best Sellers</Link>
+      </span>
     </div>
   )
 }
