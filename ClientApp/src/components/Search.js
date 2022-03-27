@@ -5,9 +5,10 @@ import Autocomplete from './Autocomplete';
 export default function Search() {
     const [isLoading, setIsLoading] = useState(true);
     const [names, setNames] = useState([]);
+    const [history, setHistory] = useState([]);
     const handleSearchClick = (event) => {
-        service.getNames().then(response => {
-            console.log(response);
+        service.getBestSellingHistory().then(response => {
+            console.log('getBestSellingHistory', response);
         });
     };
     const handleTopBestSellerClick = (e) => {
@@ -15,27 +16,38 @@ export default function Search() {
             console.log(response);
         });
     };
+    async function fetchNames() {
+        await service.getNames().then(function (response) {
+            let tempNames = [];
+            response.results.forEach(name => {
+                tempNames.push(name.display_name);
+            });
+            setNames({ names: tempNames });
+            setIsLoading(false);
+        });
+    }
+    async function fetchHistory() {
+        await service.getBestSellingHistory().then(function (response) {
+            let history = [];
+            console.log(response.results)
+            response.results.forEach(book => {
+                history.push(book);
+            });
+            setHistory({ history });
+            setIsLoading(false); console.log(history)
+        });
+    }
 
     useEffect(() => {
-        async function fetchNames() {
-            await service.getNames().then(function (response) {
-                let tempNames = [];
-                response.results.forEach(name => {
-                    tempNames.push(name.display_name);
-                });
-                setNames({ names: tempNames });
-                setIsLoading(false);
-            });
-        }
-        fetchNames();
+        fetchHistory();
     }, []);
 
     return (
         <div className={style.wrapper}>
             <p className={style.searchTitle}> Search Best Seller Books </p>
             <p className={style.searchSubTitle}>Discover best selling books and enjoy reading.</p>
-            {!isLoading && names && <Autocomplete
-                suggestions={names.names}
+            {!isLoading && history && <Autocomplete
+                suggestions={history}
             />
             }
             <button className={style.searchButton}
