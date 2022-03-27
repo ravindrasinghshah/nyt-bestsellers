@@ -2,13 +2,13 @@ import react from "react";
 import { useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import moment from 'moment';
-import { FiExternalLink } from 'react-icons/fi';
 import { BsFillTrophyFill } from 'react-icons/bs';
 import { service } from '../http/service';
 import Error from "./Error";
 import Share from "./Share";
 import Loading from './Loading';
 import SupportUs from './SupportUs';
+import BuyBook from './BuyBook';
 
 export default function Book() {
     const location = useLocation();
@@ -87,25 +87,11 @@ export default function Book() {
                                             {book.description}
                                         </div>
                                         <div className="flex flex-row items-center pt-5">
-                                            <BsFillTrophyFill className="mr-3 text-[#FDCC0D] text-xl" /> <span>Book ranked <strong>{book.rank}</strong> on {moment(book?.updated_date?.split(' ')[0]).format('LL')}.</span>
+                                            <BsFillTrophyFill className="mr-3 text-[#FDCC0D] text-xl" />
+                                            <span>Book ranked <strong>{book.rank}</strong> on {moment(book?.updated_date?.split(' ')[0]).format('LL')}.</span>
                                         </div>
-                                        <div className={style.buyWrapper}>
-                                            <p className="pb-2">Buy Book</p>
-                                            <div className={style.buyBox}>
-                                                {book.buy_links.map((buy, index) => {
-                                                    return (
-                                                        <a href={buy.url} name={buy.name}
-                                                            key={index}
-                                                            target="_blank"
-                                                            className={style.action}>
-                                                            <span><FiExternalLink /></span>
-                                                            <span className='ml-2'>{buy.name}</span>
-                                                        </a>
-                                                    )
-                                                })}
-                                            </div>
-                                            <SupportUs />
-                                        </div>
+                                        <BuyBook book={book} />
+                                        <SupportUs />
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +111,4 @@ const style = {
     share: `ml-auto items-center`,
     detailsWrapper: `flex flex-col md:flex-row pt-10`,
     detailsSection: `pt-10 md:pt-0 md:ml-10 md:pl-10 md:border-l`,
-    buyWrapper: `flex flex-col border-t mt-12 pt-8 text-xl font-semibold`,
-    buyBox: `flex items-center flex-wrap pt-2`,
-    action: `flex flex-row items-center border p-2 mr-2 mt-1 rounded bg-white hover:bg-gray-100 font-thin text-sm`
 }
