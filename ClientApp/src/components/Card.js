@@ -8,7 +8,7 @@ export default function Card(prop) {
                 to={`/book${searchQuery}`}
                 state={{ book: prop.book, name: prop.name }}
                 target="_blank">
-                <div className="relative overflow-hidden">
+                <div className="relative overflow-hidden h-full">
                     <img src={prop.book.book_image} alt="book_image" className={style.image + " object-fill"} />
                 </div>
             </Link>
@@ -17,7 +17,7 @@ export default function Card(prop) {
 }
 const style = {
     wrapper: `border rounded-lg mb-10 w-full md:w-[19%]	`,
-    image: `rounded-lg w-full transition transform hover:scale-110 duration-700 ease-in-out`,
+    image: `rounded-lg w-full h-full transition transform hover:scale-110 duration-700 ease-in-out`,
     title: `my-1 font-semibold`,
     author: `text-sm mb-2 text-gray-700 font-semibold`,
     buy: `flex justify-end border-t pb-2 pr-2`,
