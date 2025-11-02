@@ -42,6 +42,7 @@ export default function BestSellers() {
                       className="mr-2"
                       src="https://developer.nytimes.com/files/poweredby_nytimes_30a.png?v=1583354208339"
                       alt="nyt_icon"
+                      cache="force-cache"
                     />
                     The New York Times Best Sellers for{" "}
                     {books.results.display_name}
@@ -52,7 +53,7 @@ export default function BestSellers() {
                         <span className="font-thin">Books found</span>{" "}
                         <span>{books.num_results}</span>
                       </div>
-                      <div className="mx-2 leading-3">
+                      <div className="mx-2 leading-3 hidden md:block">
                         <span>.</span>
                       </div>
                       <div>
@@ -63,7 +64,7 @@ export default function BestSellers() {
                           ).format("LL")}
                         </span>
                       </div>
-                      <div className="mx-2 leading-3">
+                      <div className="mx-2 leading-3 hidden md:block">
                         <span>.</span>
                       </div>
                       <div>
@@ -101,11 +102,10 @@ export default function BestSellers() {
 }
 
 const style = {
-  wrapper: `w-screen font-light pt-10 pb-5 px-5 md:px-10`,
+  wrapper: `w-auto h-auto font-light pt-10 pb-5 px-5 md:px-10`,
   back: `underline text-sm`,
   nyt: `font-semibold text-3xl flex flex-row items-center pt-7 pb-2`,
   subtitle: `flex flex-col md:flex-row text-sm`,
   share: `ml-auto items-center`,
-  detailsWrapper: `flex flex-col md:flex-row pt-10 flex-wrap justify-start`,
   cardRow: `flex flex-col md:flex-row flex-wrap justify-between mt-10 w-full`,
 };

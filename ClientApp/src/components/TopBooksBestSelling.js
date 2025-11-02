@@ -43,17 +43,21 @@ export default function TopBooksBestSelling() {
                         </div>
                       </div>
                       <div className={style.cardRow}>
-                        {item.books.map((book, index) => {
-                          return (
-                            <Card
-                              key={index}
-                              book={book}
-                              nameEncoded={item.list_name_encoded}
-                              name={item.list_name}
-                              publishedDate={data.data.results.published_date}
-                            />
-                          );
-                        })}
+                        {item.books?.length > 0
+                          ? item.books.slice(0, 8).map((book, index) => {
+                              return (
+                                <Card
+                                  key={index}
+                                  book={book}
+                                  nameEncoded={item.list_name_encoded}
+                                  name={item.list_name}
+                                  publishedDate={
+                                    data.data.results.published_date
+                                  }
+                                />
+                              );
+                            })
+                          : null}
                       </div>
                     </div>
                   );
@@ -70,6 +74,6 @@ const style = {
   wrapper: `px-5 md:px-10 w-full`,
   title: `text-3xl py-10 text-center`,
   categoryHeader: `flex flex-col md:flex-row justify-between items-center border-t`,
-  categoryTitle: `font-bold text-3xl pb-2 pt-10`, 
+  categoryTitle: `font-bold text-3xl pb-2 pt-10`,
   cardRow: `flex flex-col md:flex-row flex-wrap justify-between mt-10 w-full`,
 };

@@ -12,7 +12,6 @@ import BuyBook from "../components/BuyBook";
 
 export default function Book() {
   const location = useLocation();
-  const name = location.state?.name;
   const [book, setData] = useState(location.state?.book);
   const [isLoading, setIsLoading] = useState(location.state == null);
 
@@ -28,16 +27,18 @@ export default function Book() {
       let published_date = searchQuery.get("d");
       let category = searchQuery.get("n");
       let title = searchQuery.get("t");
+      
       var response = await service.getBookByDate_Category_Title(
         published_date,
         category,
         title
       );
+      
       setData(response);
       setIsLoading(false);
     }
     if (isLoading) fetchBook();
-  }, [isLoading]);
+  }, [isLoading, searchQuery]);
   return (
     <div className={style.wrapper}>
       <>
@@ -55,6 +56,7 @@ export default function Book() {
                   className="mr-1"
                   src="https://developer.nytimes.com/files/poweredby_nytimes_30a.png?v=1583354208339"
                   alt="nyt_icon"
+                  cache="force-cache"
                 />
                 The New York Times Best Seller
               </div>
@@ -62,29 +64,22 @@ export default function Book() {
               <div className="flex flex-row">
                 <div className={style.subtitle}>
                   <div>
-                    <span className="font-thin">Author</span>{" "}
+                    <span className="font-thin">Author: </span>
                     <span>{book.author}</span>
                   </div>
-                  <div className="mx-2 leading-3">
+                  <div className="mx-2 leading-3 hidden md:block">
                     <span>.</span>
                   </div>
                   <div>
-                    <span className="font-thin">ISBN</span>{" "}
+                    <span className="font-thin">ISBN: </span>
                     <span>{book.primary_isbn13}</span>
                   </div>
-                  <div className="mx-2 leading-3">
+                  <div className="mx-2 leading-3 hidden md:block">
                     <span>.</span>
                   </div>
                   <div>
-                    <span className="font-thin">Published by</span>{" "}
+                    <span className="font-thin">Published by: </span>
                     <span>{book.publisher}</span>
-                  </div>
-                  <div className="mx-2 leading-3">
-                    <span>.</span>
-                  </div>
-                  <div>
-                    <span className="font-thin">Category</span>{" "}
-                    <span>{name}</span>
                   </div>
                 </div>
                 <div className={style.subtitle + " " + style.share}>
@@ -126,7 +121,7 @@ export default function Book() {
 }
 
 const style = {
-  wrapper: `w-screen font-light pt-10 pb-5 px-5 md:px-10`,
+  wrapper: `w-screen h-screen font-light pt-10 pb-5 px-5 md:px-10`,
   back: `underline text-sm`,
   nyt: `font-semibold text-sm flex flex-row items-center pt-7`,
   title: `text-3xl font-semibold pt-3 pb-2`,
