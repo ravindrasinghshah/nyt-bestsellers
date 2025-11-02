@@ -27,7 +27,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### Deployment
 
- TBD - Firebase
+Netlify
 
 ## Tech Stack
 ### React JS -v17.0.2
