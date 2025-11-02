@@ -1,11 +1,11 @@
 import Banner from "../components/Banner";
-import Top5BestSelling from "../components/Top5BestSelling";
+import TopBooksBestSelling from "../components/TopBooksBestSelling";
 
 function Home() {
   return (
     <>
       <Banner />
-      <Top5BestSelling />
+      <TopBooksBestSelling />
     </>
   );
 }

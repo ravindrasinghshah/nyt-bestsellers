@@ -5,8 +5,8 @@ const Names = () => {
     return execute("names.json?");
 };
 
-// Get top 5 books for all the Best Sellers lists for specified date.
-const Top5BestSellingByDate = () => {
+// Get books for all the Best Sellers lists for specified date.
+const TopBooksBestSellingByDate = () => {
     var d = new Date().toISOString().split('T')[0];
     return execute(`overview.json?published_date=${d}&`);
 };
@@ -49,7 +49,7 @@ const BookByDate_Category_Title = async (p_date, category, title) => {
 
 export const service = {
     getNames: Names,
-    getTop5BestSellingByDate: Top5BestSellingByDate,
+    getTopBooksBestSellingByDate: TopBooksBestSellingByDate,
     getBestSellingByName: BestSellingByName,
     getBestSellingByDate: BestSellingByDate,
     getBestSellingHistory: BestSellingHistory,
