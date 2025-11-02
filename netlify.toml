@@ -1,0 +1,30 @@
+[build]
+  # Directory to change to before starting a build
+  base = "ClientApp"
+  # Directory that contains the deploy-ready static files
+  publish = "build"
+  # Default build command
+  command = "npm run build"
+
+# Functions configuration
+[functions]
+  # Directory where Netlify looks for serverless functions
+  directory = "netlify/functions"
+  # Node.js version for functions
+  node_bootstrap = "18.x"
+
+# Redirect rules - let Netlify handle routing for React Router
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+

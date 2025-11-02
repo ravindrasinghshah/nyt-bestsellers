@@ -2,18 +2,18 @@ import execute from './base.js';
 
 // Get Best Sellers list names.
 const Names = () => {
-    return execute("names.json?");
+    return execute("names.json");
 };
 
 // Get books for all the Best Sellers lists for specified date.
 const TopBooksBestSellingByDate = () => {
     var d = new Date().toISOString().split('T')[0];
-    return execute(`overview.json?published_date=${d}&`);
+    return execute(`overview.json?published_date=${d}`);
 };
 
 // Get Best Sellers list by date.
 const BestSellingByName = (name) => {
-    return execute(`current/${name}.json?`);
+    return execute(`current/${name}.json`);
 };
 
 // Get all books for all the Best Sellers lists for specified date.
@@ -23,11 +23,11 @@ const BestSellingByDate = (date) => {
 
 // Get Best Sellers list history.
 const BestSellingHistory = () => {
-    return execute(`best-sellers/history.json?`);
+    return execute(`best-sellers/history.json`);
 };
 // Get books by published date and category
 const BooksByDateAndCategory = (p_date, category) => {
-    return execute(`${p_date}/${category}.json?`);
+    return execute(`${p_date}/${category}.json`);
 }
 
 // Get books by published date and category and title

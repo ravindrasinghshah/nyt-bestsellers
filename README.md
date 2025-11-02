@@ -23,10 +23,14 @@ A modern React web application that displays New York Times Best Seller books us
 - **React Toastify 8.2.0** - Toast notifications
 - **Moment.js 2.29.1** - Date manipulation and formatting
 
+### Backend Stack
+- **Netlify Functions** - Serverless functions for secure API proxy
+- **Node.js 18+** - Server runtime environment (native fetch support)
+
 ### API Integration
 - **NYT Books API v3** - Official New York Times Books API
+- **Secure Backend Proxy** - API key secured in Netlify Functions, never exposed to client
 - **RESTful Architecture** - Clean API service layer with centralized HTTP client
-- **Environment Variables** - Secure API key management
 
 ### Project Structure
 ```
@@ -52,6 +56,14 @@ nyt-bestsellers/
 │   │   └── svg/             # SVG assets
 │   ├── package.json
 │   └── tailwind.config.js
+├── netlify/                  # Netlify serverless functions
+│   └── functions/
+│       └── api-proxy.js     # Secure API proxy function
+├── server/                    # Local development server (optional)
+│   ├── server.js             # Express proxy server
+│   ├── package.json          # Backend dependencies
+│   └── .env.example          # Environment variables template
+├── netlify.toml             # Netlify configuration
 ├── RestAPIs/                # API documentation and testing
 │   └── Books.http          # HTTP request examples
 └── README.md
@@ -72,32 +84,69 @@ nyt-bestsellers/
    cd nyt-bestsellers
    ```
 
-2. **Install dependencies**
+2. **Install Frontend Dependencies**
    ```bash
    cd ClientApp
    npm install
    ```
 
 3. **Environment Configuration**
-   Create a `.env` file in the `ClientApp` directory:
-   ```env
-   REACT_APP_ApiUrl=https://api.nytimes.com/svc/books/v3/lists/
-   REACT_APP_ApiKey=your_nyt_api_key_here
-   ```
 
-4. **Get NYT API Key**
+   **Get NYT API Key**
    - Visit [NYT Developer Portal](https://developer.nytimes.com/)
    - Sign up for a free account
    - Create a new app to get your API key
-   - Add the API key to your `.env` file
 
-5. **Start the development server**
+4. **Start Development (Local)**
+   
+   For local development, you can use Netlify Dev which runs the functions locally:
    ```bash
+   # Install Netlify CLI globally (if not already installed)
+   npm install -g netlify-cli
+   
+   # From the project root, start Netlify Dev
+   netlify dev
+   ```
+   
+   Or use the React development server (functions will work in production):
+   ```bash
+   cd ClientApp
    npm start
    ```
 
+5. **Deploy to Netlify**
+
+   **Option 1: Deploy via Netlify Dashboard**
+   1. Push your code to GitHub/GitLab/Bitbucket
+   2. Connect your repository to Netlify
+   3. Set build settings:
+      - Base directory: `ClientApp`
+      - Build command: `npm run build`
+      - Publish directory: `ClientApp/build`
+   4. Add environment variable:
+      - Go to Site settings → Environment variables
+      - Add `NYT_API_KEY` with your API key value
+   5. Deploy!
+
+   **Option 2: Deploy via Netlify CLI**
+   ```bash
+   # Install Netlify CLI (if not already installed)
+   npm install -g netlify-cli
+   
+   # Login to Netlify
+   netlify login
+   
+   # Deploy
+   netlify deploy --prod
+   ```
+   
+   **Important:** Make sure to set the `NYT_API_KEY` environment variable in Netlify:
+   - Go to your site settings → Environment variables
+   - Add `NYT_API_KEY` with your API key
+
 6. **Build for production**
    ```bash
+   cd ClientApp
    npm run build
    ```
 
@@ -129,10 +178,18 @@ The application integrates with the following NYT Books API endpoints:
 
 ## 🔒 Security
 
-- API keys are stored in environment variables
-- No sensitive data is exposed in client-side code
-- HTTPS-only API communication
+### API Key Protection
+- **Netlify Functions**: The NYT API key is stored securely in Netlify environment variables and never exposed to the client
+- **Serverless Architecture**: API key is handled server-side in Netlify Functions, never in client code
+- **No Client-Side Exposure**: The API key is never included in URLs, network requests, or bundled JavaScript
+- **Environment Variables**: API keys are stored in Netlify environment variables (never committed to git)
+
+### Security Best Practices
+- HTTPS-only API communication in production
+- CORS enabled for controlled cross-origin requests
 - Input validation and sanitization
+- No sensitive data in client-side code or network logs
+- Serverless functions run in isolated environments
 
 ## 📄 License
 
