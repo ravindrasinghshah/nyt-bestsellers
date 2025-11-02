@@ -12,7 +12,6 @@ export default function HeroCarousel() {
   const [isPaused, setIsPaused] = useState(false);
 
   const { data, isLoading, error } = useBooks();
-  console.log("data", data);
 
   // Get published date from the results
   const publishedDate = data?.data?.results?.published_date;
@@ -33,7 +32,6 @@ export default function HeroCarousel() {
       };
     });
   });
-  console.log("topBooksByList", topBooksByList);
   // Autoplay: advance every 3 seconds, pause on hover
   useEffect(() => {
     if (!topBooksByList?.length || isPaused) return;

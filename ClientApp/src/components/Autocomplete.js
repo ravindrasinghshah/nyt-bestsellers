@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 export default function Autocomplete(props) {
     const books = props;
-    console.log(books)
     // The active selection's index
     const [activeSuggestion, setActiveSuggestion] = useState(0);
     // The suggestions that match the user's input

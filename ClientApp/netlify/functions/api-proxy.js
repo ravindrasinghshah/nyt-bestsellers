@@ -1,8 +1,8 @@
 // Netlify serverless function to proxy NYT Books API requests
 // This function keeps the API key secure on the server side
 
-const NYT_API_BASE_URL = process.env.NYT_API_BASE_URL || 'https://api.nytimes.com/svc/books/v3/lists/';
-const NYT_API_KEY = process.env.NYT_API_KEY;
+const NYT_API_BASE_URL = process.env.REACT_APP_ApiUrl || 'https://api.nytimes.com/svc/books/v3/lists/';
+const NYT_API_KEY = process.env.REACT_APP_ApiKey;
 
 exports.handler = async (event, context) => {
   // Handle CORS
