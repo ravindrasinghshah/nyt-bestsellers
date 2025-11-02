@@ -56,10 +56,12 @@ nyt-bestsellers/
 │   │   └── svg/             # SVG assets
 │   ├── package.json
 │   └── tailwind.config.js
-├── netlify/                  # Netlify serverless functions
-│   └── functions/
-│       └── api-proxy.js     # Secure API proxy function
-├── netlify.toml             # Netlify configuration
+├── ClientApp/                 # React frontend application
+│   ├── netlify/              # Netlify serverless functions
+│   │   ├── functions/
+│   │   │   └── api-proxy.js # Secure API proxy function
+│   │   └── README.md        # Functions documentation
+│   └── netlify.toml         # Netlify configuration
 ├── RestAPIs/                # API documentation and testing
 │   └── Books.http          # HTTP request examples
 └── README.md
@@ -93,24 +95,25 @@ nyt-bestsellers/
    - Sign up for a free account
    - Create a new app to get your API key
 
-4. **Start Development (Local)**
+4. **Environment Configuration for Local Development**
    
-   For local development, you can use Netlify Dev which runs the functions locally:
-   ```bash
-   # Install Netlify CLI globally (if not already installed)
-   npm install -g netlify-cli
-   
-   # From the project root, start Netlify Dev
-   netlify dev
+   Create a `.env` file in the `ClientApp` directory for local development:
+   ```env
+   REACT_APP_ApiKey=your_nyt_api_key_here
    ```
    
-   Or use the React development server (functions will work in production):
+   > **Note:** This file is for local development only. The API key will NOT be used in production (Netlify Functions handle it securely).
+
+5. **Start Development**
+   
    ```bash
    cd ClientApp
    npm start
    ```
+   
+   The app will use the NYT API directly in development (if `REACT_APP_ApiKey` is set) or Netlify Functions if running with `netlify dev`.
 
-5. **Deploy to Netlify**
+6. **Deploy to Netlify**
 
    **Option 1: Deploy via Netlify Dashboard**
    1. Push your code to GitHub/GitLab/Bitbucket
@@ -119,6 +122,7 @@ nyt-bestsellers/
       - Base directory: `ClientApp`
       - Build command: `npm run build`
       - Publish directory: `ClientApp/build`
+      - Note: Netlify will automatically detect `ClientApp/netlify.toml` when base directory is set
    4. Add environment variable:
       - Go to Site settings → Environment variables
       - Add `NYT_API_KEY` with your API key value
@@ -140,7 +144,7 @@ nyt-bestsellers/
    - Go to your site settings → Environment variables
    - Add `NYT_API_KEY` with your API key
 
-6. **Build for production**
+7. **Build for production**
    ```bash
    cd ClientApp
    npm run build

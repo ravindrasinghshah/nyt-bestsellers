@@ -1,12 +1,11 @@
 [build]
-  # Directory to change to before starting a build
-  base = "ClientApp"
   # Directory that contains the deploy-ready static files
   publish = "build"
   # Default build command
   command = "npm run build"
 
 # Functions configuration
+# Functions directory is relative to this directory (ClientApp)
 [functions]
   # Directory where Netlify looks for serverless functions
   directory = "netlify/functions"

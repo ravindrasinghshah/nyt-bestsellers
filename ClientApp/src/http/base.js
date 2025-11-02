@@ -1,42 +1,62 @@
-// Determine the proxy URL based on environment
-// In production (Netlify), use Netlify Functions
-// In development, use local backend or Netlify Functions
-const getProxyUrl = () => {
-    // Check if we have an explicit proxy URL set
-    if (process.env.REACT_APP_ProxyUrl) {
-        return process.env.REACT_APP_ProxyUrl;
-    }
-    
-    // In production or Netlify, use Netlify Functions
-    // Netlify Functions are accessible at /.netlify/functions/{function-name}
-    if (process.env.NODE_ENV === 'production' || window.location.hostname.includes('netlify')) {
-        return '/.netlify/functions/api-proxy';
-    }
-    
-    // Development: try Netlify Functions first (if using Netlify Dev), fallback to local server
-    return '/.netlify/functions/api-proxy';
+// API configuration
+const NYT_API_BASE_URL = process.env.REACT_APP_ApiUrl;
+
+// Determine whether to use direct API or Netlify Functions
+const shouldUseDirectAPI = () => {
+  // In production/Netlify, always use Netlify Functions (secure)
+  if (
+    process.env.NODE_ENV === "production" ||
+    window.location.hostname.includes("netlify")
+  ) {
+    return false;
+  }
+
+  // In development, use direct API if API key is available
+  // This makes local development easier without needing Netlify Dev
+  return !!process.env.REACT_APP_ApiKey;
 };
 
-const proxyUrl = getProxyUrl();
-
 export const execute = async (path) => {
-    // Use backend proxy - API key is handled server-side
-    // For Netlify Functions, pass path as query parameter
-    const apiUrl = `${proxyUrl}?path=${encodeURIComponent(path)}`;
-    const options = {
-        "method": "GET",
-        "headers": {
-            "Accept": "application/json"
-        }
-    };
-    return await fetch(apiUrl, options).then(handleResponse);
-}
+  let apiUrl;
+  const options = {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  };
+
+  if (shouldUseDirectAPI()) {
+    // Development: Use NYT API directly with API key from env
+    const apiKey = process.env.REACT_APP_ApiKey;
+    // Parse path - it may contain query parameters
+    let nytPath = path;
+    const queryParams = new URLSearchParams();
+
+    // Check if path already contains query parameters
+    const pathParts = nytPath.split("?");
+    if (pathParts.length > 1) {
+      nytPath = pathParts[0];
+      const pathQueryParams = new URLSearchParams(pathParts[1]);
+      pathQueryParams.forEach((value, key) => {
+        queryParams.append(key, value);
+      });
+    }
+    queryParams.set("api-key", apiKey);
+    apiUrl = `${NYT_API_BASE_URL}${nytPath}?${queryParams.toString()}`;
+  } else {
+    // Production: Use Netlify Functions (secure - API key handled server-side)
+    const proxyUrl = "/.netlify/functions/api-proxy";
+    apiUrl = `${proxyUrl}?path=${encodeURIComponent(path)}`;
+  }
+
+  return await fetch(apiUrl, options).then(handleResponse);
+};
 
 function handleResponse(response) {
-    if (!response.ok) {
-        return Promise.reject(response.statusText);
-    }
-    return response.json();
+  if (!response.ok) {
+    return Promise.reject(response.statusText);
+  }
+  return response.json();
 }
 
 export default execute;
