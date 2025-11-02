@@ -59,10 +59,6 @@ nyt-bestsellers/
 ├── netlify/                  # Netlify serverless functions
 │   └── functions/
 │       └── api-proxy.js     # Secure API proxy function
-├── server/                    # Local development server (optional)
-│   ├── server.js             # Express proxy server
-│   ├── package.json          # Backend dependencies
-│   └── .env.example          # Environment variables template
 ├── netlify.toml             # Netlify configuration
 ├── RestAPIs/                # API documentation and testing
 │   └── Books.http          # HTTP request examples

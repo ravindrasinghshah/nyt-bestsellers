@@ -10,8 +10,6 @@
 [functions]
   # Directory where Netlify looks for serverless functions
   directory = "netlify/functions"
-  # Node.js version for functions
-  node_bootstrap = "18.x"
 
 # Redirect rules - let Netlify handle routing for React Router
 [[redirects]]
