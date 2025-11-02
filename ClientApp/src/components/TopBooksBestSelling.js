@@ -16,7 +16,7 @@ export default function TopBooksBestSelling() {
           </p>
         </div>
       ) : (
-        <div className="h-full overflow-y-auto">
+        <div className="w-full h-full overflow-y-auto">
           {data &&
             data.data &&
             data.data.results &&
@@ -67,9 +67,9 @@ export default function TopBooksBestSelling() {
 }
 
 const style = {
-  wrapper: `px-5 md:px-10 mt-20 `,
+  wrapper: `px-5 md:px-10 w-full`,
   title: `text-3xl py-10 text-center`,
-  categoryHeader: `flex flex-col md:flex-row justify-between items-center`,
-  categoryTitle: `font-normal text-2xl pb-2 pt-5`,
+  categoryHeader: `flex flex-col md:flex-row justify-between items-center border-t`,
+  categoryTitle: `font-bold text-3xl pb-2 pt-10`, 
   cardRow: `flex flex-col md:flex-row flex-wrap justify-between mt-10 w-full`,
 };

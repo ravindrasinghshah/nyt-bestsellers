@@ -9,7 +9,8 @@ export default function Banner() {
 }
 
 const style = {
-  wrapper: `h-96 w-full max-w-full mt-5 flex flex-row justify-around`,
+  // increase height for small screens only
+  wrapper: `h-100 w-full max-w-full mt-5 flex flex-row justify-around`, 
   searchWrapper: `h-full flex-1 flex justify-center`,
   contentWrapper: `h-full flex-1 flex justify-center`,
   contentImage: `h-full float-right`

@@ -64,8 +64,43 @@ export default function HeroCarousel() {
         The New York Times Current Week's Best Sellers Top Books
       </h1>
       <div className={style.carousel}>
+        {/* Mobile: Horizontal scrollable carousel */}
+        <div 
+          className="md:hidden overflow-x-auto overflow-y-hidden pb-4 -mx-5 px-5"
+          style={{ 
+            scrollBehavior: 'smooth',
+            WebkitOverflowScrolling: 'touch'
+          }}
+        >
+          <div className="flex gap-4 items-center w-max pr-5">
+            {topBooksByList.map((book, idx) => {
+              const searchQuery = `?d=${book.publishedDate}&n=${
+                book.listNameEncoded
+              }&t=${encodeURIComponent(book.title)}`;
+
+              return (
+                <Link
+                  key={idx}
+                  to={`/book${searchQuery}`}
+                  state={{ book: book.book, name: book.listName }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-shrink-0"
+                >
+                  <img
+                    src={book.image}
+                    alt={book.title}
+                    className="w-[180px] h-[240px] object-cover rounded-lg shadow-lg cursor-pointer transition-all duration-300 hover:scale-105"
+                  />
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Desktop: Centered carousel */}
         <div
-          className="relative h-[400px] flex items-center justify-center overflow-hidden w-full max-w-full"
+          className="hidden md:flex relative h-[400px] items-center justify-center overflow-hidden w-full max-w-full"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -88,79 +123,79 @@ export default function HeroCarousel() {
                 // Active book - center
                 classes +=
                   " left-1/2 -translate-x-1/2 z-30 opacity-100 hover:scale-110";
-                widthClass = "w-[260px] md:w-[300px]";
-                heightClass = "h-[340px] md:h-[360px]";
+                widthClass = "w-[300px]";
+                heightClass = "h-[360px]";
               } else if (Math.abs(relativePos) === 1) {
                 // Adjacent books
                 if (relativePos < 0) {
                   classes +=
-                    " left-[38%] md:left-[40%] -translate-x-1/2 z-25 opacity-85";
+                    " left-[40%] -translate-x-1/2 z-25 opacity-85";
                 } else {
                   classes +=
-                    " left-[62%] md:left-[60%] -translate-x-1/2 z-25 opacity-85";
+                    " left-[60%] -translate-x-1/2 z-25 opacity-85";
                 }
-                widthClass = "w-[160px] md:w-[200px]";
-                heightClass = "h-[210px] md:h-[260px]";
+                widthClass = "w-[200px]";
+                heightClass = "h-[260px]";
               } else if (Math.abs(relativePos) === 2) {
                 // Second tier books
                 if (relativePos < 0) {
                   classes +=
-                    " left-[30%] md:left-[32%] -translate-x-1/2 z-20 opacity-70";
+                    " left-[32%] -translate-x-1/2 z-20 opacity-70";
                 } else {
                   classes +=
-                    " left-[70%] md:left-[68%] -translate-x-1/2 z-20 opacity-70";
+                    " left-[68%] -translate-x-1/2 z-20 opacity-70";
                 }
-                widthClass = "w-[130px] md:w-[160px]";
-                heightClass = "h-[170px] md:h-[210px]";
+                widthClass = "w-[160px]";
+                heightClass = "h-[210px]";
               } else if (Math.abs(relativePos) === 3) {
                 // Third tier books
                 if (relativePos < 0) {
                   classes +=
-                    " left-[22%] md:left-[24%] -translate-x-1/2 z-15 opacity-55";
+                    " left-[24%] -translate-x-1/2 z-15 opacity-55";
                 } else {
                   classes +=
-                    " left-[78%] md:left-[76%] -translate-x-1/2 z-15 opacity-55";
+                    " left-[76%] -translate-x-1/2 z-15 opacity-55";
                 }
-                widthClass = "w-[110px] md:w-[130px]";
-                heightClass = "h-[145px] md:h-[175px]";
+                widthClass = "w-[130px]";
+                heightClass = "h-[175px]";
               } else if (Math.abs(relativePos) === 4) {
                 // Fourth tier books
                 if (relativePos < 0) {
                   classes +=
-                    " left-[14%] md:left-[16%] -translate-x-1/2 z-10 opacity-40";
+                    " left-[16%] -translate-x-1/2 z-10 opacity-40";
                 } else {
                   classes +=
-                    " left-[86%] md:left-[84%] -translate-x-1/2 z-10 opacity-40";
+                    " left-[84%] -translate-x-1/2 z-10 opacity-40";
                 }
-                widthClass = "w-[90px] md:w-[110px]";
-                heightClass = "h-[120px] md:h-[150px]";
+                widthClass = "w-[110px]";
+                heightClass = "h-[150px]";
               } else if (Math.abs(relativePos) === 5) {
                 // Fifth tier books
                 if (relativePos < 0) {
                   classes +=
-                    " left-[6%] md:left-[8%] -translate-x-1/2 z-5 opacity-25";
+                    " left-[8%] -translate-x-1/2 z-5 opacity-25";
                 } else {
                   classes +=
-                    " left-[94%] md:left-[92%] -translate-x-1/2 z-5 opacity-25";
+                    " left-[92%] -translate-x-1/2 z-5 opacity-25";
                 }
-                widthClass = "w-[75px] md:w-[90px]";
-                heightClass = "h-[100px] md:h-[125px]";
+                widthClass = "w-[90px]";
+                heightClass = "h-[125px]";
               } else if (Math.abs(relativePos) === 6) {
                 // Sixth tier books
                 if (relativePos < 0) {
                   classes +=
-                    " left-[2%] md:left-[3%] -translate-x-1/2 z-0 opacity-15";
+                    " left-[3%] -translate-x-1/2 z-0 opacity-15";
                 } else {
                   classes +=
-                    " left-[98%] md:left-[97%] -translate-x-1/2 z-0 opacity-15";
+                    " left-[97%] -translate-x-1/2 z-0 opacity-15";
                 }
-                widthClass = "w-[60px] md:w-[75px]";
-                heightClass = "h-[80px] md:h-[100px]";
+                widthClass = "w-[75px]";
+                heightClass = "h-[100px]";
               } else {
                 // Too far - hide
                 classes += " opacity-0";
-                widthClass = "w-[50px] md:w-[60px]";
-                heightClass = "h-[65px] md:h-[80px]";
+                widthClass = "w-[60px]";
+                heightClass = "h-[80px]";
               }
 
               const searchQuery = `?d=${book.publishedDate}&n=${
@@ -190,7 +225,7 @@ export default function HeroCarousel() {
           </div>
         </div>
         {/* Dot indicators - positioned below carousel */}
-        <div className="flex justify-center items-center mt-6 relative z-40">
+        <div className="hidden md:flex justify-center items-center mt-6 relative z-40">
           <div className="flex gap-2 items-center">
             {topBooksByList &&
               topBooksByList.map((_, idx) => (
