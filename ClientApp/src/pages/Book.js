@@ -121,7 +121,7 @@ export default function Book() {
 }
 
 const style = {
-  wrapper: `w-screen h-screen font-light pt-10 pb-5 px-5 md:px-10`,
+  wrapper: `w-auto h-auto font-light pt-10 pb-5 px-5 md:px-10`,
   back: `underline text-sm`,
   nyt: `font-semibold text-sm flex flex-row items-center pt-7`,
   title: `text-3xl font-semibold pt-3 pb-2`,
