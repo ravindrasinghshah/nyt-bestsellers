@@ -7,10 +7,30 @@ A modern React web application that displays New York Times Best Seller books us
 - **Bestseller Lists**: Browse current bestseller lists by category (Fiction, Non-Fiction, etc.)
 - **Top 5 Books**: View the top 5 bestselling books across all categories
 - **Book Details**: Detailed information about each book including cover, description, and purchase links
-- **Search & Filter**: Find books by category and date
 - **Responsive Design**: Modern, mobile-friendly interface built with Tailwind CSS
 - **Social Sharing**: Share book recommendations on social media platforms
 - **Historical Data**: Access to historical bestseller data
+
+## ⚡ Quick Start
+
+Want to get started quickly? Here's the fastest path:
+
+```bash
+# 1. Clone and setup
+git clone https://github.com/yourusername/nyt-bestsellers.git
+cd nyt-bestsellers/ClientApp
+
+# 2. Install dependencies
+npm install
+
+# 3. Get NYT API key from https://developer.nytimes.com/
+# 4. Create .env file with: REACT_APP_ApiKey=your_key_here
+
+# 5. Start developing!
+npm start
+```
+
+That's it! The app will open at `http://localhost:3000`. For detailed setup instructions, see [Getting Started](#-getting-started) below.
 
 ## 🏗️ Architecture
 
@@ -48,107 +68,182 @@ nyt-bestsellers/
 │   │   │   ├── Loading.js
 │   │   │   ├── Search.js
 │   │   │   └── ...
+│   │   ├── pages/           # Page components
+│   │   │   ├── Home.js
+│   │   │   ├── BestSellers.js
+│   │   │   ├── Book.js
+│   │   │   └── ...
 │   │   ├── http/            # API service layer
 │   │   │   ├── base.js      # HTTP client configuration
 │   │   │   └── service.js   # API service methods
 │   │   ├── common/          # Shared utilities
 │   │   │   └── config.js    # Application configuration
+│   │   ├── context/         # React context providers
 │   │   └── svg/             # SVG assets
-│   ├── package.json
-│   └── tailwind.config.js
-├── ClientApp/                 # React frontend application
 │   ├── netlify/              # Netlify serverless functions
 │   │   ├── functions/
 │   │   │   └── api-proxy.js # Secure API proxy function
 │   │   └── README.md        # Functions documentation
-│   └── netlify.toml         # Netlify configuration
+│   ├── package.json
+│   ├── netlify.toml         # Netlify configuration
+│   └── tailwind.config.js   # Tailwind CSS configuration
 ├── RestAPIs/                # API documentation and testing
 │   └── Books.http          # HTTP request examples
 └── README.md
 ```
 
-## 🛠️ Setup & Installation
+## 🛠️ Getting Started
 
 ### Prerequisites
-- Node.js (v14 or higher)
-- npm or yarn package manager
-- NYT Books API key
 
-### Getting Started
+Before you begin, ensure you have the following installed on your system:
 
-1. **Clone the repository**
+- **Node.js** (v14 or higher) - [Download Node.js](https://nodejs.org/)
+- **npm** (comes with Node.js) or **yarn** package manager
+- **Git** - [Download Git](https://git-scm.com/)
+- **NYT Books API Key** (free) - Get one at [NYT Developer Portal](https://developer.nytimes.com/)
+
+### Step-by-Step Installation
+
+#### 1. Clone the Repository
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/nyt-bestsellers.git
+
+# Navigate to the project directory
+cd nyt-bestsellers
+```
+
+#### 2. Get Your NYT API Key
+
+1. Visit the [NYT Developer Portal](https://developer.nytimes.com/)
+2. Sign up for a free account (if you don't have one)
+3. Go to "Apps" and create a new app
+4. Select the "Books API" product
+5. Copy your API key (you'll need it in the next step)
+
+#### 3. Configure Environment Variables
+
+Create a `.env` file in the `ClientApp` directory:
+
+```bash
+cd ClientApp
+touch .env  # On Windows: type nul > .env
+```
+
+Add your API key to the `.env` file:
+
+```env
+REACT_APP_ApiKey=your_nyt_api_key_here
+```
+
+> **Important:** 
+> - Never commit the `.env` file to version control (it's already in `.gitignore`)
+> - This API key is only used for local development
+> - In production, the API key is secured in Netlify Functions and never exposed to clients
+
+#### 4. Install Dependencies
+
+```bash
+# Make sure you're in the ClientApp directory
+cd ClientApp
+
+# Install all project dependencies
+npm install
+```
+
+This will install all required packages including React, Tailwind CSS, and other dependencies.
+
+#### 5. Start the Development Server
+
+```bash
+npm start
+```
+
+The application will:
+- Open in your default browser at `http://localhost:3000`
+- Automatically reload when you make changes
+- Show linting errors in the console
+
+You should see the NYT Bestsellers homepage! 🎉
+
+#### 6. Verify Installation
+
+- The app should load without errors
+- You should see bestseller lists and books
+- If you see errors, check the [Troubleshooting](#-troubleshooting) section below
+
+### Running Tests
+
+```bash
+# Run tests in watch mode
+npm test
+
+# Run tests once
+npm test -- --watchAll=false
+```
+
+### Building for Production
+
+```bash
+# Create an optimized production build
+npm run build
+
+# The build folder will contain the production-ready files
+```
+
+## 🚀 Deployment
+
+### Deploy to Netlify
+
+#### Option 1: Deploy via Netlify Dashboard (Recommended for beginners)
+
+1. **Push your code to GitHub**
    ```bash
-   git clone <repository-url>
-   cd nyt-bestsellers
+   git add .
+   git commit -m "Initial commit"
+   git push origin main
    ```
 
-2. **Install Frontend Dependencies**
-   ```bash
-   cd ClientApp
-   npm install
-   ```
+2. **Connect to Netlify**
+   - Go to [Netlify](https://app.netlify.com/)
+   - Click "Add new site" → "Import an existing project"
+   - Connect to your GitHub repository
 
-3. **Environment Configuration**
+3. **Configure Build Settings**
+   - Base directory: `ClientApp`
+   - Build command: `npm run build`
+   - Publish directory: `ClientApp/build`
 
-   **Get NYT API Key**
-   - Visit [NYT Developer Portal](https://developer.nytimes.com/)
-   - Sign up for a free account
-   - Create a new app to get your API key
+4. **Add Environment Variable**
+   - Go to Site settings → Environment variables
+   - Add new variable:
+     - Key: `NYT_API_KEY`
+     - Value: Your NYT API key
 
-4. **Environment Configuration for Local Development**
-   
-   Create a `.env` file in the `ClientApp` directory for local development:
-   ```env
-   REACT_APP_ApiKey=your_nyt_api_key_here
-   ```
-   
-   > **Note:** This file is for local development only. The API key will NOT be used in production (Netlify Functions handle it securely).
+5. **Deploy!**
+   - Click "Deploy site"
+   - Netlify will automatically build and deploy your app
 
-5. **Start Development**
-   
-   ```bash
-   cd ClientApp
-   npm start
-   ```
-   
-   The app will use the NYT API directly in development (if `REACT_APP_ApiKey` is set) or Netlify Functions if running with `netlify dev`.
+#### Option 2: Deploy via Netlify CLI
 
-6. **Deploy to Netlify**
+```bash
+# Install Netlify CLI globally
+npm install -g netlify-cli
 
-   **Option 1: Deploy via Netlify Dashboard**
-   1. Push your code to GitHub/GitLab/Bitbucket
-   2. Connect your repository to Netlify
-   3. Set build settings:
-      - Base directory: `ClientApp`
-      - Build command: `npm run build`
-      - Publish directory: `ClientApp/build`
-      - Note: Netlify will automatically detect `ClientApp/netlify.toml` when base directory is set
-   4. Add environment variable:
-      - Go to Site settings → Environment variables
-      - Add `NYT_API_KEY` with your API key value
-   5. Deploy!
+# Login to Netlify
+netlify login
 
-   **Option 2: Deploy via Netlify CLI**
-   ```bash
-   # Install Netlify CLI (if not already installed)
-   npm install -g netlify-cli
-   
-   # Login to Netlify
-   netlify login
-   
-   # Deploy
-   netlify deploy --prod
-   ```
-   
-   **Important:** Make sure to set the `NYT_API_KEY` environment variable in Netlify:
-   - Go to your site settings → Environment variables
-   - Add `NYT_API_KEY` with your API key
+# Initialize and deploy
+cd ClientApp
+netlify init
+netlify deploy --prod
+```
 
-7. **Build for production**
-   ```bash
-   cd ClientApp
-   npm run build
-   ```
+**Important:** Make sure to set the `NYT_API_KEY` environment variable in Netlify:
+- Go to your site settings → Environment variables
+- Add `NYT_API_KEY` with your API key value
 
 ## 📱 Available Scripts
 
@@ -193,22 +288,390 @@ The application integrates with the following NYT Books API endpoints:
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+We love your input! We want to make contributing to NYT Bestsellers as easy and transparent as possible, whether it's:
+
+- Reporting a bug
+- Discussing the current state of the code
+- Submitting a fix
+- Proposing new features
+- Becoming a maintainer
+
+### Development Workflow
+
+#### 1. Fork and Clone
+
+```bash
+# Fork the repository on GitHub, then clone your fork
+git clone https://github.com/yourusername/nyt-bestsellers.git
+cd nyt-bestsellers
+
+# Add the original repository as upstream
+git remote add upstream https://github.com/originalowner/nyt-bestsellers.git
+```
+
+#### 2. Create a Branch
+
+```bash
+# Create a new branch for your feature/fix
+# Use a descriptive name that indicates what you're working on
+git checkout -b feature/your-feature-name
+# or for bug fixes:
+git checkout -b fix/bug-description
+```
+
+**Branch naming conventions:**
+- `feature/` - New features
+- `fix/` - Bug fixes
+- `docs/` - Documentation changes
+- `refactor/` - Code refactoring
+- `test/` - Adding or updating tests
+- `style/` - Formatting, missing semicolons, etc.
+
+#### 3. Make Your Changes
+
+- Write clean, readable code
+- Follow the existing code style (see [Code Standards](#code-standards) below)
+- Add comments for complex logic
+- Update documentation if needed
+- Add tests for new features
+
+#### 4. Test Your Changes
+
+```bash
+# Run tests to ensure nothing is broken
+npm test
+
+# Test the build
+npm run build
+
+# Make sure the app runs correctly
+npm start
+```
+
+#### 5. Commit Your Changes
+
+Write clear, meaningful commit messages:
+
+```bash
+git add .
+git commit -m "Add feature: implement dark mode toggle"
+```
+
+**Commit message guidelines:**
+- Use present tense ("Add feature" not "Added feature")
+- Use imperative mood ("Move cursor to..." not "Moves cursor to...")
+- Limit the first line to 72 characters
+- Reference issues and pull requests after the first line
+- Example:
+  ```
+  Fix: resolve API timeout issue
+  
+  The timeout was occurring due to missing error handling.
+  Added try-catch block and timeout configuration.
+  
+  Fixes #123
+  ```
+
+#### 6. Keep Your Branch Updated
+
+```bash
+# Fetch latest changes from upstream
+git fetch upstream
+
+# Rebase your branch on top of the latest main branch
+git rebase upstream/main
+```
+
+#### 7. Push and Create Pull Request
+
+```bash
+# Push to your fork
+git push origin feature/your-feature-name
+```
+
+Then:
+1. Go to the original repository on GitHub
+2. You'll see a banner suggesting to create a Pull Request
+3. Click "Compare & pull request"
+4. Fill out the PR template (see below)
+
+### Code Standards
+
+#### JavaScript/React Style
+
+- Use **functional components** with hooks (no class components)
+- Follow **ES6+** syntax
+- Use meaningful variable and function names
+- Keep components small and focused (single responsibility)
+- Extract reusable logic into custom hooks
+- Use **arrow functions** for component definitions
+
+**Example:**
+```javascript
+// ✅ Good
+const BookCard = ({ book, onSelect }) => {
+  const handleClick = () => {
+    onSelect(book);
+  };
+
+  return (
+    <div onClick={handleClick} className="book-card">
+      <h3>{book.title}</h3>
+    </div>
+  );
+};
+
+// ❌ Avoid
+const BookCard = ({book, onSelect}) => {
+  return <div onClick={() => onSelect(book)}><h3>{book.title}</h3></div>
+}
+```
+
+#### Tailwind CSS Guidelines
+
+- Use Tailwind utility classes instead of custom CSS when possible
+- Group related classes logically
+- Use responsive prefixes (`sm:`, `md:`, `lg:`) appropriately
+- Keep custom CSS in `index.css` minimal
+
+#### File Organization
+
+- One component per file
+- Use PascalCase for component file names: `BookCard.js`
+- Use camelCase for utility files: `formatDate.js`
+- Keep related files grouped in directories
+
+#### Import Organization
+
+```javascript
+// 1. React and third-party libraries
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+// 2. Local components
+import Header from '../components/Header';
+import Loading from '../components/Loading';
+
+// 3. Utilities and configs
+import { formatDate } from '../common/utils';
+import { API_BASE_URL } from '../common/config';
+
+// 4. Styles (if needed)
+import './Book.css';
+```
+
+### Pull Request Guidelines
+
+#### Before Submitting
+
+- [ ] Code follows the style guidelines
+- [ ] Self-review completed
+- [ ] Comments added for complex code
+- [ ] Documentation updated (if needed)
+- [ ] Tests pass locally
+- [ ] No console errors or warnings
+- [ ] Changes tested in multiple browsers (if UI changes)
+
+#### PR Template
+
+When creating a Pull Request, include:
+
+1. **Description**: What does this PR do? Why?
+2. **Type of Change**:
+   - Bug fix
+   - New feature
+   - Breaking change
+   - Documentation update
+3. **Testing**: How was this tested?
+4. **Screenshots** (if UI changes): Before/after images
+5. **Checklist**: Confirm all items are checked
+
+#### PR Title Format
+
+```
+[Type] Brief description (e.g., "Fix: Resolve API timeout issue")
+```
+
+Types: `Fix`, `Feature`, `Docs`, `Refactor`, `Test`, `Style`
+
+### Reporting Issues
+
+Found a bug? Have a feature request? Follow these guidelines:
+
+#### Bug Reports
+
+1. **Check existing issues** - Make sure the bug hasn't been reported
+2. **Create a new issue** with:
+   - Clear, descriptive title
+   - Steps to reproduce
+   - Expected vs. actual behavior
+   - Screenshots (if applicable)
+   - Environment info (OS, browser, Node version)
+   - Error messages or logs
+
+#### Feature Requests
+
+1. **Check existing issues** - See if the feature was already requested
+2. **Create a new issue** with:
+   - Clear description of the feature
+   - Why it would be useful
+   - Potential implementation ideas (optional)
+   - Any alternatives considered
+
+### Questions?
+
+- Open an issue for discussion
+- Check existing issues and discussions
+- Review the codebase and documentation
+
+### Code of Conduct
+
+By participating in this project, you agree to maintain a respectful and inclusive environment for everyone. Be kind, constructive, and professional in all interactions.
+
+### Recognition
+
+Contributors will be recognized in:
+- CONTRIBUTORS.md (coming soon)
+- Release notes
+- Project documentation
+
+Thank you for contributing to NYT Bestsellers! 🎉
+
+## 🔧 Troubleshooting
+
+### Common Issues and Solutions
+
+#### API Key Not Working
+
+**Problem:** App loads but no books are displayed, or you see API errors.
+
+**Solutions:**
+1. Verify your API key is correct in `.env` file
+2. Check that the `.env` file is in the `ClientApp` directory (not root)
+3. Ensure the API key variable is named exactly `REACT_APP_ApiKey`
+4. Restart the development server after adding/changing the `.env` file
+5. Check the NYT Developer Portal to ensure your API key is active
+
+#### Port Already in Use
+
+**Problem:** `Error: listen EADDRINUSE: address already in use :::3000`
+
+**Solutions:**
+```bash
+# Option 1: Kill the process using port 3000
+# On Windows:
+netstat -ano | findstr :3000
+taskkill /PID <PID> /F
+
+# On Mac/Linux:
+lsof -ti:3000 | xargs kill -9
+
+# Option 2: Use a different port
+PORT=3001 npm start
+```
+
+#### Module Not Found Errors
+
+**Problem:** `Module not found: Can't resolve '...'`
+
+**Solutions:**
+```bash
+# Delete node_modules and package-lock.json
+rm -rf node_modules package-lock.json  # Mac/Linux
+rmdir /s node_modules && del package-lock.json  # Windows
+
+# Reinstall dependencies
+npm install
+```
+
+#### Build Fails
+
+**Problem:** `npm run build` fails with errors
+
+**Solutions:**
+1. Check for syntax errors in your code
+2. Ensure all imports are correct
+3. Verify environment variables are set
+4. Clear the build directory: `rm -rf build` then rebuild
+5. Check Node.js version: `node --version` (should be v14+)
+
+#### Tailwind Styles Not Working
+
+**Problem:** Tailwind utility classes not applying
+
+**Solutions:**
+1. Ensure Tailwind is properly configured in `tailwind.config.js`
+2. Check that `index.css` imports Tailwind directives
+3. Restart the development server
+4. Clear browser cache
+
+#### CORS Errors
+
+**Problem:** CORS errors when making API requests
+
+**Solutions:**
+- In development, this shouldn't occur if using the `.env` variable
+- If using Netlify Functions, ensure they're properly configured
+- Check that the API proxy function is correctly set up
+
+#### Netlify Deployment Issues
+
+**Problem:** Build fails on Netlify
+
+**Solutions:**
+1. Verify build settings in Netlify dashboard
+2. Check that base directory is set to `ClientApp`
+3. Ensure `NYT_API_KEY` environment variable is set
+4. Review build logs for specific error messages
+5. Test build locally: `npm run build`
+
+### Getting Help
+
+If you're still experiencing issues:
+
+1. **Search existing issues** - Your problem might already be reported
+2. **Check the logs** - Browser console and terminal output
+3. **Create a new issue** with:
+   - Description of the problem
+   - Steps to reproduce
+   - Error messages
+   - Environment details (OS, Node version, browser)
+   - Screenshots (if applicable)
 
 ## 📞 Support
 
-For support and questions:
-- Check the [NYT Books API documentation](https://developer.nytimes.com/docs/books-product/1/overview)
-- Review the API examples in `RestAPIs/Books.http`
-- Open an issue in the repository
+### Resources
+
+- **NYT Books API Documentation**: [Developer Portal](https://developer.nytimes.com/docs/books-product/1/overview)
+- **API Examples**: Check `RestAPIs/Books.http` for request examples
+- **React Documentation**: [React Docs](https://react.dev/)
+- **Tailwind CSS Docs**: [Tailwind CSS](https://tailwindcss.com/docs)
+
+### Getting Help
+
+- **GitHub Issues**: Open an issue for bugs, feature requests, or questions
+- **Discussions**: Use GitHub Discussions for general questions and ideas
+- **Code Review**: Submit a Pull Request for code review and feedback
+
+### Reporting Problems
+
+When reporting issues, please include:
+
+1. **What you're trying to do**
+2. **What you expected to happen**
+3. **What actually happened**
+4. **Steps to reproduce** (if it's a bug)
+5. **Environment information**:
+   - Operating System
+   - Node.js version (`node --version`)
+   - npm version (`npm --version`)
+   - Browser and version (if relevant)
+
+This information helps us understand and fix issues faster!
 
 ## 🔄 Version History
 
