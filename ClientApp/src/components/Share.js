@@ -180,6 +180,6 @@ const style = {
   action: `bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse hover:underline`,
   share: `flex flex-row items-center hover:underline font-semibold`,
   shareButtonWrapper: `flex flex-col md:flex-row justify-start items-center space-x-0 md:space-x-5`,
-  shareButton: `flex border w-full md:w-1/2 rounded text-base font-normal h-12 md:h-16 mb-3 md:mb-5 hover:bg-gray-100`,
+  shareButton: `flex items-center border w-full md:w-1/2 rounded text-base font-normal h-12 md:h-16 mb-3 md:mb-5 hover:bg-gray-100`,
   shareButtonContent: `flex flex-row items-center justify-start ml-5`,
 };
